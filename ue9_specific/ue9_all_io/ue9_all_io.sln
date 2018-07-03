@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 10.00
 # Visual Studio 2008
-Project("{CCA78505-1AAF-41AF-A73C-23E08C335A07}") = "u9_all_io", "u9_all_io.vcproj", "{A64D1B84-F69B-4412-B531-A00E195696B3}"
+Project("{CCA78505-1AAF-41AF-A73C-23E08C335A07}") = "ue9_all_io", "ue9_all_io.vcproj", "{A64D1B84-F69B-4412-B531-A00E195696B3}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
