@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{CCA78505-1AAF-41AF-A73C-23E08C335A07}") = "u9_all_io", "u9_all_io.vcproj", "{A64D1B84-F69B-4412-B531-A00E195696B3}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{A64D1B84-F69B-4412-B531-A00E195696B3}.Debug|Win32.ActiveCfg = Debug|Win32
+		{A64D1B84-F69B-4412-B531-A00E195696B3}.Debug|Win32.Build.0 = Debug|Win32
+		{A64D1B84-F69B-4412-B531-A00E195696B3}.Debug|x64.ActiveCfg = Debug|x64
+		{A64D1B84-F69B-4412-B531-A00E195696B3}.Debug|x64.Build.0 = Debug|x64
+		{A64D1B84-F69B-4412-B531-A00E195696B3}.Release|Win32.ActiveCfg = Release|Win32
+		{A64D1B84-F69B-4412-B531-A00E195696B3}.Release|Win32.Build.0 = Release|Win32
+		{A64D1B84-F69B-4412-B531-A00E195696B3}.Release|x64.ActiveCfg = Release|x64
+		{A64D1B84-F69B-4412-B531-A00E195696B3}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

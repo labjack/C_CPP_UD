@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{4F2F0A04-5611-4006-A8FD-45AC12F30169}") = "ue9_simple", "ue9_simple.vcproj", "{8AC006BE-62DE-4F4C-8D0E-96F4530B60A2}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{8AC006BE-62DE-4F4C-8D0E-96F4530B60A2}.Debug|Win32.ActiveCfg = Debug|Win32
+		{8AC006BE-62DE-4F4C-8D0E-96F4530B60A2}.Debug|Win32.Build.0 = Debug|Win32
+		{8AC006BE-62DE-4F4C-8D0E-96F4530B60A2}.Debug|x64.ActiveCfg = Debug|x64
+		{8AC006BE-62DE-4F4C-8D0E-96F4530B60A2}.Debug|x64.Build.0 = Debug|x64
+		{8AC006BE-62DE-4F4C-8D0E-96F4530B60A2}.Release|Win32.ActiveCfg = Release|Win32
+		{8AC006BE-62DE-4F4C-8D0E-96F4530B60A2}.Release|Win32.Build.0 = Release|Win32
+		{8AC006BE-62DE-4F4C-8D0E-96F4530B60A2}.Release|x64.ActiveCfg = Release|x64
+		{8AC006BE-62DE-4F4C-8D0E-96F4530B60A2}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

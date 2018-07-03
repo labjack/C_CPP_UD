@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{CE23564D-5A70-41B0-BD2B-B95A36227890}") = "u6_memory", "u6_memory.vcproj", "{EFB00779-E35C-49E2-B4F5-8761F5C36A0A}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EFB00779-E35C-49E2-B4F5-8761F5C36A0A}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EFB00779-E35C-49E2-B4F5-8761F5C36A0A}.Debug|Win32.Build.0 = Debug|Win32
+		{EFB00779-E35C-49E2-B4F5-8761F5C36A0A}.Debug|x64.ActiveCfg = Debug|x64
+		{EFB00779-E35C-49E2-B4F5-8761F5C36A0A}.Debug|x64.Build.0 = Debug|x64
+		{EFB00779-E35C-49E2-B4F5-8761F5C36A0A}.Release|Win32.ActiveCfg = Release|Win32
+		{EFB00779-E35C-49E2-B4F5-8761F5C36A0A}.Release|Win32.Build.0 = Release|Win32
+		{EFB00779-E35C-49E2-B4F5-8761F5C36A0A}.Release|x64.ActiveCfg = Release|x64
+		{EFB00779-E35C-49E2-B4F5-8761F5C36A0A}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

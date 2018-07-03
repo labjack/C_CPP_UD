@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{6FE45E3D-D9C7-419A-A1BC-24EB49353B8B}") = "ue9_quadrature", "ue9_quadrature.vcproj", "{4558FA92-C295-4E06-A057-A4F76FAE70DB}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4558FA92-C295-4E06-A057-A4F76FAE70DB}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4558FA92-C295-4E06-A057-A4F76FAE70DB}.Debug|Win32.Build.0 = Debug|Win32
+		{4558FA92-C295-4E06-A057-A4F76FAE70DB}.Debug|x64.ActiveCfg = Debug|x64
+		{4558FA92-C295-4E06-A057-A4F76FAE70DB}.Debug|x64.Build.0 = Debug|x64
+		{4558FA92-C295-4E06-A057-A4F76FAE70DB}.Release|Win32.ActiveCfg = Release|Win32
+		{4558FA92-C295-4E06-A057-A4F76FAE70DB}.Release|Win32.Build.0 = Release|Win32
+		{4558FA92-C295-4E06-A057-A4F76FAE70DB}.Release|x64.ActiveCfg = Release|x64
+		{4558FA92-C295-4E06-A057-A4F76FAE70DB}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

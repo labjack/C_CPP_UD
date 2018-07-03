@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{FEF6EF49-78E0-4581-83F5-E424977E8899}") = "ue9_pwm_duty_cycle", "ue9_pwm_duty_cycle.vcproj", "{C15B5906-E902-4B80-B02D-1F2C896319E1}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{C15B5906-E902-4B80-B02D-1F2C896319E1}.Debug|Win32.ActiveCfg = Debug|Win32
+		{C15B5906-E902-4B80-B02D-1F2C896319E1}.Debug|Win32.Build.0 = Debug|Win32
+		{C15B5906-E902-4B80-B02D-1F2C896319E1}.Debug|x64.ActiveCfg = Debug|x64
+		{C15B5906-E902-4B80-B02D-1F2C896319E1}.Debug|x64.Build.0 = Debug|x64
+		{C15B5906-E902-4B80-B02D-1F2C896319E1}.Release|Win32.ActiveCfg = Release|Win32
+		{C15B5906-E902-4B80-B02D-1F2C896319E1}.Release|Win32.Build.0 = Release|Win32
+		{C15B5906-E902-4B80-B02D-1F2C896319E1}.Release|x64.ActiveCfg = Release|x64
+		{C15B5906-E902-4B80-B02D-1F2C896319E1}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

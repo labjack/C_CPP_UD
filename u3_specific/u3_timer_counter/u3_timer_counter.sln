@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{6C52B431-254C-40CD-B4C0-40D21DD67B1E}") = "u3_timer_counter", "u3_timer_counter.vcproj", "{4EC69F41-7714-47DF-A791-A5A2DAA83ABD}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4EC69F41-7714-47DF-A791-A5A2DAA83ABD}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4EC69F41-7714-47DF-A791-A5A2DAA83ABD}.Debug|Win32.Build.0 = Debug|Win32
+		{4EC69F41-7714-47DF-A791-A5A2DAA83ABD}.Debug|x64.ActiveCfg = Debug|x64
+		{4EC69F41-7714-47DF-A791-A5A2DAA83ABD}.Debug|x64.Build.0 = Debug|x64
+		{4EC69F41-7714-47DF-A791-A5A2DAA83ABD}.Release|Win32.ActiveCfg = Release|Win32
+		{4EC69F41-7714-47DF-A791-A5A2DAA83ABD}.Release|Win32.Build.0 = Release|Win32
+		{4EC69F41-7714-47DF-A791-A5A2DAA83ABD}.Release|x64.ActiveCfg = Release|x64
+		{4EC69F41-7714-47DF-A791-A5A2DAA83ABD}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

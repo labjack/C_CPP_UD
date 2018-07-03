@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{795BA486-973E-4275-B691-E6CB3F0F93A1}") = "ljtdac", "ljtdac.vcproj", "{4A735270-0C4C-4DD8-9573-28A4EFA96507}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{4A735270-0C4C-4DD8-9573-28A4EFA96507}.Debug|Win32.ActiveCfg = Debug|Win32
+		{4A735270-0C4C-4DD8-9573-28A4EFA96507}.Debug|Win32.Build.0 = Debug|Win32
+		{4A735270-0C4C-4DD8-9573-28A4EFA96507}.Debug|x64.ActiveCfg = Debug|x64
+		{4A735270-0C4C-4DD8-9573-28A4EFA96507}.Debug|x64.Build.0 = Debug|x64
+		{4A735270-0C4C-4DD8-9573-28A4EFA96507}.Release|Win32.ActiveCfg = Release|Win32
+		{4A735270-0C4C-4DD8-9573-28A4EFA96507}.Release|Win32.Build.0 = Release|Win32
+		{4A735270-0C4C-4DD8-9573-28A4EFA96507}.Release|x64.ActiveCfg = Release|x64
+		{4A735270-0C4C-4DD8-9573-28A4EFA96507}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

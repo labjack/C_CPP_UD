@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 10.00
+# Visual Studio 2008
+Project("{2A67BD75-116D-4E80-9048-F806CA148988}") = "u3_all_io", "u3_all_io.vcproj", "{EAD7D3C4-4EB7-4C41-8958-39386B7D9162}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Win32 = Debug|Win32
+		Debug|x64 = Debug|x64
+		Release|Win32 = Release|Win32
+		Release|x64 = Release|x64
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{EAD7D3C4-4EB7-4C41-8958-39386B7D9162}.Debug|Win32.ActiveCfg = Debug|Win32
+		{EAD7D3C4-4EB7-4C41-8958-39386B7D9162}.Debug|Win32.Build.0 = Debug|Win32
+		{EAD7D3C4-4EB7-4C41-8958-39386B7D9162}.Debug|x64.ActiveCfg = Debug|x64
+		{EAD7D3C4-4EB7-4C41-8958-39386B7D9162}.Debug|x64.Build.0 = Debug|x64
+		{EAD7D3C4-4EB7-4C41-8958-39386B7D9162}.Release|Win32.ActiveCfg = Release|Win32
+		{EAD7D3C4-4EB7-4C41-8958-39386B7D9162}.Release|Win32.Build.0 = Release|Win32
+		{EAD7D3C4-4EB7-4C41-8958-39386B7D9162}.Release|x64.ActiveCfg = Release|x64
+		{EAD7D3C4-4EB7-4C41-8958-39386B7D9162}.Release|x64.Build.0 = Release|x64
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
