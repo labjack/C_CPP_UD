@@ -32,7 +32,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -89,17 +89,6 @@ main()
 	double numScansRequested;
 	double adblDataA[4000] = {0};  //Max buffer size (#channels*numScansRequested)
 	double adblDataB[4000] = {0};
-
-	//Make a long parameter which holds the address of the data array.  We do this
-	//so the compiler does not generate a warning in the eGet call that retrieves
-	//stream data.  Note that the x1 parameter  in eGet (and AddRequest) is fairly
-	//generic, in that sometimes it could just be a write parameter, and sometimes
-	//it has the address of an array.  Since x1 is not declared as a pointer, the
-	//compiler will complain if you just pass the array pointer without casting
-	//it to a long as follows.
-	long padblDataA = (long)&adblDataA[0];
-	long padblDataB = (long)&adblDataB[0];
-
 
 	//Open the LabJack UE9s.
 	lngErrorcode = OpenLabJack (LJ_dtUE9, LJ_ctUSB, "2", 0, &lngHandleA);
@@ -232,7 +221,7 @@ main()
 
 
 	//Read data
-	while(!kbhit())	//Loop will run until any key is hit
+	while(!_kbhit())	//Loop will run until any key is hit
 	{
 		//Since we are using wait mode LJ_swNONE, we will wait a little, then
 		//read however much data is available.  Thus this delay will control how
@@ -255,7 +244,7 @@ main()
 		//Note that the array we pass must be sized to hold enough SAMPLES, and
 		//the Value we pass specifies the number of SCANS to read.
 		numScansRequested=numScans;
-		lngErrorcode = eGet(lngHandleA, LJ_ioGET_STREAM_DATA, LJ_chALL_CHANNELS, &numScansRequested, padblDataA);
+		lngErrorcode = eGetPtr(lngHandleA, LJ_ioGET_STREAM_DATA, LJ_chALL_CHANNELS, &numScansRequested, &adblDataA[0]);
 		//This displays the number of scans that were actually read.
 		printf("\nIteration # %d\n",i);
 		printf("Number read from unit A = %.0f\n",numScansRequested);
@@ -267,7 +256,7 @@ main()
 		printf("Comm Backlog A = %.0f\n",dblCommBacklog);
 
 		numScansRequested=numScans;
-		lngErrorcode = eGet(lngHandleB, LJ_ioGET_STREAM_DATA, LJ_chALL_CHANNELS, &numScansRequested, padblDataB);
+		lngErrorcode = eGetPtr(lngHandleB, LJ_ioGET_STREAM_DATA, LJ_chALL_CHANNELS, &numScansRequested, &adblDataB[0]);
 		//This displays the number of scans that were actually read.
 		printf("\nIteration # %d\n",i);
 		printf("Number read from unit B = %.0f\n",numScansRequested);

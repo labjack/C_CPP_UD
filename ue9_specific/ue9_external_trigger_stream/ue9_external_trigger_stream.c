@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -86,17 +86,6 @@ main()
 	double numScans = 2000;  //2x the expected # of scans (2*scanRate*delayms/1000)
 	double numScansRequested;
 	double adblData[12000] = {0};  //Max buffer size (#channels*numScansRequested)
-
-
-	//Make a long parameter which holds the address of the data array.  We do this
-	//so the compiler does not generate a warning in the eGet call that retrieves
-	//stream data.  Note that the x1 parameter  in eGet (and AddRequest) is fairly
-	//generic, in that sometimes it could just be a write parameter, and sometimes
-	//it has the address of an array.  Since x1 is not declared as a pointer, the
-	//compiler will complain if you just pass the array pointer without casting
-	//it to a long as follows.
-	long padblData = (long)&adblData[0];
-
 
 	//Open the first found LabJack UE9 over USB.
 	lngErrorcode = OpenLabJack (LJ_dtUE9, LJ_ctUSB, "1", 1, &lngHandle);
@@ -231,7 +220,7 @@ main()
   
 
 	//Read data
-	while(!kbhit())	//Loop will run until any key is hit
+	while(!_kbhit())	//Loop will run until any key is hit
 	{
 		//Since we are using wait mode LJ_swNONE, we will wait a little, then
 		//read however much data is available.  Thus this delay will control how
@@ -259,7 +248,7 @@ main()
 		//Note that the array we pass must be sized to hold enough SAMPLES, and
 		//the Value we pass specifies the number of SCANS to read.
 		numScansRequested=numScans;
-		lngErrorcode = eGet(lngHandle, LJ_ioGET_STREAM_DATA, LJ_chALL_CHANNELS, &numScansRequested, padblData);
+		lngErrorcode = eGetPtr(lngHandle, LJ_ioGET_STREAM_DATA, LJ_chALL_CHANNELS, &numScansRequested, &adblData[0]);
 		//This displays the number of scans that were actually read.
 		printf("\nIteration # %d\n",i);
 		printf("Number read = %.0f\n",numScansRequested);

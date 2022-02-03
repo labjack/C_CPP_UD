@@ -17,7 +17,7 @@
 
 #include <stdio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -72,7 +72,6 @@ main()
 	double numBytesToWrite;
 	double numBytesToRead;
 	char writeArray[2] = {0x70,0x70};
-	long pwriteArray = (long)&writeArray[0];
 	char readArray[2] = {0};
 	long preadArray = (long)&readArray[0];
 
@@ -90,11 +89,11 @@ main()
 		numBytesToRead = 2;
 
 		//Raw Out
-		lngErrorcode = eGet(lngHandle, LJ_ioRAW_OUT, 0, &numBytesToWrite, pwriteArray);
+		lngErrorcode = eGetPtr(lngHandle, LJ_ioRAW_OUT, 0, &numBytesToWrite, &writeArray[0]);
 		ErrorHandler(lngErrorcode, __LINE__, 0);
 
 		//Raw In
-		lngErrorcode = eGet(lngHandle, LJ_ioRAW_IN, 0, &numBytesToRead, preadArray);
+		lngErrorcode = eGetPtr(lngHandle, LJ_ioRAW_IN, 0, &numBytesToRead, &readArray[0]);
 		ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	}

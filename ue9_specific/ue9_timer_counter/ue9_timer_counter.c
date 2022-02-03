@@ -12,7 +12,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -234,7 +234,7 @@ void main()
 	{
 		switch(lngIOType)
 		{
-		case LJ_ioGET_TIMER :
+		case 60 : // LJ_ioGET_TIMER
 			switch(lngChannel)
 			{
 				case 1:

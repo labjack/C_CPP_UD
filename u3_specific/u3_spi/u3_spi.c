@@ -25,7 +25,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -77,8 +77,6 @@ void main()
 	LJ_HANDLE lngHandle=0;
 	double numSPIBytesToTransfer;
 	unsigned char dataArray[50] = {0};
-	long pdataArray = (long)&dataArray[0];
-
 
 	//Open the LabJack U3.
 	lngErrorcode = OpenLabJack (LJ_dtU3, LJ_ctUSB, "1", 1, &lngHandle);
@@ -100,7 +98,7 @@ void main()
 	lngErrorcode = AddRequest(lngHandle, LJ_ioPUT_CONFIG, LJ_chSPI_DISABLE_DIR_CONFIG,0,0,0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
-	//Mode A:  CPHA=1, CPOL=1.
+	//Mode A:  CPHA=0, CPOL=0.
 	lngErrorcode = AddRequest(lngHandle, LJ_ioPUT_CONFIG, LJ_chSPI_MODE,0,0,0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
@@ -155,7 +153,7 @@ void main()
 	dataArray[3] = 240;
 	
 	//Transfer the data.  The write and read is done at the same time.
-	lngErrorcode = eGet(lngHandle, LJ_ioSPI_COMMUNICATION, 0, &numSPIBytesToTransfer, pdataArray);
+	lngErrorcode = eGetPtr(lngHandle, LJ_ioSPI_COMMUNICATION, 0, &numSPIBytesToTransfer, &dataArray[0]);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	//Display the read data.

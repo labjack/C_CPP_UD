@@ -14,7 +14,7 @@
 
 #include <stdio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -52,11 +52,6 @@ void ErrorHandler (LJ_ERROR lngErrorcode, long lngLineNumber, long lngIteration)
    }
 }
 
-
-const long DRIVER_CLOCK_BASE = LJ_tc48MHZ; // The value to be passed to the driver
-const long DRIVER_CLOCK_DIV = 1; // The divisor to be passed to the driver
-                                 // This constant is only provided in case you expand upon this
-                                 // example but it is not in use.
 const long CLOCK = 48000000; // Base / divisor in Hz
 
 
@@ -89,13 +84,12 @@ void main()
     //Use the 48 MHz timer clock base
 	//Max pulse of 1365 microseconds as given by the formula: max pulse (ms) = (2^16-1) / clock
 	//NOTE: If you change this value, please update the constants above
-	lngErrorcode = AddRequest(lngHandle, LJ_ioPUT_CONFIG, LJ_chTIMER_CLOCK_BASE, DRIVER_CLOCK_BASE, 0, 0);
+	lngErrorcode = AddRequest(lngHandle, LJ_ioPUT_CONFIG, LJ_chTIMER_CLOCK_BASE, LJ_tc48MHZ, 0, 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	// Use this next section for a divisor (only for users that expand upon this example)
     // Set the divisor to 48 so the actual timer clock is 1 MHz.
-    // NOTE: If you use this section, please update the constants above
-	//lngErrorcode = AddRequest(lngHandle, LJ_ioPUT_CONFIG, LJ_chTIMER_CLOCK_DIVISOR, DRIVER_CLOCK_DIV, 0, 0);
+	//lngErrorcode = AddRequest(lngHandle, LJ_ioPUT_CONFIG, LJ_chTIMER_CLOCK_DIVISOR, 48, 0, 0);
 	//ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	// Enable 2 timers.  It will use FIO6 and FIO7.

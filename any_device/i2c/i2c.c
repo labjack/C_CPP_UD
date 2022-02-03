@@ -27,7 +27,7 @@
 #include <math.h>
 #include <conio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -83,11 +83,10 @@ void main()
 	unsigned char writeArray[128] = {0};
 	unsigned char readArray[128] = {0};
 	long i=0;
-	long pwriteArray = (long)&writeArray[0];
-	long preadArray = (long)&readArray[0];
 	long serialNumber=0;
 	double slopeDACA=0, offsetDACA=0, slopeDACB=0, offsetDACB=0;
 	double writeACKS=0, expectedACKS=0;
+	__int64 *pBegin;
 
 	//Seed the random number function.
 	srand(GetTickCount());
@@ -152,14 +151,14 @@ void main()
 	//the write and read into a single low-level call.
 	numI2CBytesToWrite = 1;
 	writeArray[0] = 0;  //Memory address.  User area is 0-63.
-	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, pwriteArray, 0);
+	lngErrorcode = AddRequestPtr(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, &writeArray[0], 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_GET_ACKS, 0, 0, 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	numI2CBytesToRead = 4;
-	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_READ, numI2CBytesToRead, preadArray, 0);
+	lngErrorcode = AddRequestPtr(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_READ, numI2CBytesToRead, &readArray[0], 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	//Execute the requests.
@@ -204,7 +203,7 @@ void main()
 		writeArray[i] = (char)(255*((float)rand()/RAND_MAX));
 	}
 	
-	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, pwriteArray, 0);
+	lngErrorcode = AddRequestPtr(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, &writeArray[0], 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_GET_ACKS, 0, 0, 0);
@@ -242,14 +241,14 @@ void main()
 	//the write and read into a single low-level call.
 	numI2CBytesToWrite = 1;
 	writeArray[0] = 0;  //Memory address.  User area is 0-63.
-	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, pwriteArray, 0);
+	lngErrorcode = AddRequestPtr(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, &writeArray[0], 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_GET_ACKS, 0, 0, 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	numI2CBytesToRead = 4;
-	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_READ, numI2CBytesToRead, preadArray, 0);
+	lngErrorcode = AddRequestPtr(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_READ, numI2CBytesToRead, &readArray[0], 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	//Execute the requests.
@@ -294,14 +293,14 @@ void main()
 	//
 	numI2CBytesToWrite = 1;
 	writeArray[0] = 64;  //Memory address.  Cal constants start at 64.
-	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, pwriteArray, 0);
+	lngErrorcode = AddRequestPtr(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, &writeArray[0], 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_GET_ACKS, 0, 0, 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	numI2CBytesToRead = 36;
-	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_READ, numI2CBytesToRead, preadArray, 0);
+	lngErrorcode = AddRequestPtr(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_READ, numI2CBytesToRead, &readArray[0], 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	//Execute the requests.
@@ -327,7 +326,7 @@ void main()
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	//Convert fixed point values to floating point doubles.
-	__int64 *pBegin = (__int64 *)(readArray);
+	pBegin = (__int64 *)(readArray);
 	slopeDACA = (double)(*(pBegin))/(double)4294967296;
 	offsetDACA = (double)(*(pBegin + 1))/(double)4294967296;
 	slopeDACB = (double)(*(pBegin + 2))/(double)4294967296;
@@ -355,10 +354,10 @@ void main()
 	//Set DACA to 1.2 volts.
 	numI2CBytesToWrite = 3;
 	writeArray[0] = 48;  //Write and update DACA.
-	writeArray[1] = (long)((1.2*slopeDACA)+offsetDACA)/256;  //Upper byte of binary DAC value.
-	writeArray[2] = (long)((1.2*slopeDACA)+offsetDACA)%256;  //Lower byte of binary DAC value.
+	writeArray[1] = (unsigned char)((1.2*slopeDACA)+offsetDACA)/256;  //Upper byte of binary DAC value.
+	writeArray[2] = (unsigned char)((1.2*slopeDACA)+offsetDACA)%256;  //Lower byte of binary DAC value.
 
-	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, pwriteArray, 0);
+	lngErrorcode = AddRequestPtr(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, &writeArray[0], 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_GET_ACKS, 0, 0, 0);
@@ -390,7 +389,7 @@ void main()
 	writeArray[1] = (long)((2.3*slopeDACB)+offsetDACB)/256;  //Upper byte of binary DAC value.
 	writeArray[2] = (long)((2.3*slopeDACB)+offsetDACB)%256;  //Lower byte of binary DAC value.
 	
-	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, pwriteArray, 0);
+	lngErrorcode = AddRequestPtr(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_WRITE, numI2CBytesToWrite, &writeArray[0], 0);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	lngErrorcode = AddRequest(lngHandle, LJ_ioI2C_COMMUNICATION, LJ_chI2C_GET_ACKS, 0, 0, 0);

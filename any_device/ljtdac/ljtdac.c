@@ -17,7 +17,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -74,16 +74,6 @@ void main()
 	double adblCalMem[4] = {0};
 	double serialNumber=0;
 
-	//Make a long parameter which holds the address of the data arrays.  We do this
-	//so the compiler does not generate a warning in the eGet call that passes
-	//the data.  Note that the x1 parameter  in eGet (and AddRequest) is fairly
-	//generic, in that sometimes it could just be a write parameter, and sometimes
-	//it has the address of an array.  Since x1 is not declared as a pointer, the
-	//compiler will complain if you just pass the array pointer without casting
-	//it to a long as follows.
-	long pachrUserMem = (long)&achrUserMem[0];
-	long padblCalMem = (long)&adblCalMem[0];
-
 	//Seed the random number function.
 	srand(GetTickCount());
 
@@ -126,7 +116,7 @@ void main()
 	//into the same pins, the driver would not know and would use the wrong
 	//cal constants on future updates.  If we do a cal constant read,
 	//the driver will store the constants from the new read.
-	lngErrorcode = eGet(lngHandle, LJ_ioTDAC_COMMUNICATION, LJ_chTDAC_READ_CAL_CONSTANTS, 0, padblCalMem);
+	lngErrorcode = eGetPtr(lngHandle, LJ_ioTDAC_COMMUNICATION, LJ_chTDAC_READ_CAL_CONSTANTS, 0, &adblCalMem[0]);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 	printf("DACA Slope = %.1f bits/volt\n",adblCalMem[0]);
 	printf("DACA Offset = %.1f bits\n",adblCalMem[1]);
@@ -148,7 +138,7 @@ void main()
 	//put in there such as integers, doubles, or strings.
 
 	//Read the user memory.
-    lngErrorcode = eGet(lngHandle, LJ_ioTDAC_COMMUNICATION, LJ_chTDAC_READ_USER_MEM, 0, pachrUserMem);
+    lngErrorcode = eGetPtr(lngHandle, LJ_ioTDAC_COMMUNICATION, LJ_chTDAC_READ_USER_MEM, 0, &achrUserMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Display the first 4 elements.
 	printf("Read User Mem [0-3] = %d, %d, %d, %d\n",achrUserMem[0],achrUserMem[1],achrUserMem[2],achrUserMem[3]);
@@ -159,11 +149,11 @@ void main()
 		achrUserMem[i] = (char)(255*((float)rand()/RAND_MAX));
 	}
 	printf("Write User Mem [0-3] = %d, %d, %d, %d\n",achrUserMem[0],achrUserMem[1],achrUserMem[2],achrUserMem[3]);
-	lngErrorcode = ePut(lngHandle, LJ_ioTDAC_COMMUNICATION, LJ_chTDAC_WRITE_USER_MEM, 0, pachrUserMem);
+	lngErrorcode = eGetPtr(lngHandle, LJ_ioTDAC_COMMUNICATION, LJ_chTDAC_WRITE_USER_MEM, 0, &achrUserMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//The driver delays 2 ms to allow the EEPROM to finish writing.
 	//Re-read the user memory.
-    lngErrorcode = eGet(lngHandle, LJ_ioTDAC_COMMUNICATION, LJ_chTDAC_READ_USER_MEM, 0, pachrUserMem);
+    lngErrorcode = eGetPtr(lngHandle, LJ_ioTDAC_COMMUNICATION, LJ_chTDAC_READ_USER_MEM, 0, &achrUserMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Display the first 4 elements.
 	printf("Read User Mem [0-3] = %d, %d, %d, %d\n",achrUserMem[0],achrUserMem[1],achrUserMem[2],achrUserMem[3]);

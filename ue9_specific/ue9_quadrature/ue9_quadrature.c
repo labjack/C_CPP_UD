@@ -15,7 +15,7 @@
 #include <stdio.h>
 #include <conio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -119,7 +119,7 @@ main()
 
 
 
-	while(!kbhit())	//Program will run until any key is hit
+	while(!_kbhit())	//Program will run until any key is hit
 	{
 
 		//Wait 500 milliseconds

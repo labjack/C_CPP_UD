@@ -29,7 +29,7 @@
 #include <stdio.h>
 #include <windows.h>
 #include <conio.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -111,7 +111,7 @@ main() {
 	printf("Press any key to quit\n");
 
 	//Constantly acquire temperature readings until a key is pressed
-	while(true) {
+	while(1) {
 
 		lngErrorcode = 0;
 		lngIOType = 0;
@@ -162,7 +162,7 @@ main() {
 
 		Sleep(1500);
 
-		if(kbhit())
+		if(_kbhit())
 			break;
 		}
 	return 0;

@@ -16,7 +16,7 @@
 #include <stdio.h>
 #include <windows.h>
 #include <math.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -209,11 +209,11 @@ main()
 			switch(lngIOType)
 			{
 
-			case LJ_ioGET_AIN :
+			case 10:// LJ_ioGET_AIN
 				ValueAIN[lngChannel]=dblValue;
 				break;
 
-			case LJ_ioGET_DIGITAL_PORT :
+			case 35:// LJ_ioGET_DIGITAL_PORT
 				ValueDIPort=dblValue;
 				break;
 			}

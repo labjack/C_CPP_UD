@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -66,17 +66,6 @@ void main()
 	char achrUserMem[256] = {0};
 	double adblCalMem[64] = {0};
 
-
-	//Make a long parameter which holds the address of the data arrays.  We do this
-	//so the compiler does not generate a warning in the eGet call that passes
-	//the data.  Note that the x1 parameter  in eGet (and AddRequest) is fairly
-	//generic, in that sometimes it could just be a write parameter, and sometimes
-	//it has the address of an array.  Since x1 is not declared as a pointer, the
-	//compiler will complain if you just pass the array pointer without casting
-	//it to a long as follows.
-	long pachrUserMem = (long)&achrUserMem[0];
-	long padblCalMem = (long)&adblCalMem[0];
-
 	//Seed the random number function.
 	srand(GetTickCount());
 
@@ -92,7 +81,7 @@ void main()
 	//put in there such as integers, doubles, or strings.
 
 	//Read the user memory.
-    lngErrorcode = eGet(lngHandle, LJ_ioGET_CONFIG, LJ_chUSER_MEM, 0, pachrUserMem);
+    lngErrorcode = eGetPtr(lngHandle, LJ_ioGET_CONFIG, LJ_chUSER_MEM, 0, &achrUserMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Display the first 4 elements.
 	printf("Read User Mem [0-3] = %d, %d, %d, %d\n",achrUserMem[0],achrUserMem[1],achrUserMem[2],achrUserMem[3]);
@@ -103,10 +92,10 @@ void main()
 		achrUserMem[i] = (char)(255*((float)rand()/RAND_MAX));
 	}
 	printf("Write User Mem [0-3] = %d, %d, %d, %d\n",achrUserMem[0],achrUserMem[1],achrUserMem[2],achrUserMem[3]);
-	lngErrorcode = ePut(lngHandle, LJ_ioPUT_CONFIG, LJ_chUSER_MEM, 0, pachrUserMem);
+	lngErrorcode = eGetPtr(lngHandle, LJ_ioPUT_CONFIG, LJ_chUSER_MEM, 0, &achrUserMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Re-read the user memory.
-    lngErrorcode = eGet(lngHandle, LJ_ioGET_CONFIG, LJ_chUSER_MEM, 0, pachrUserMem);
+    lngErrorcode = eGetPtr(lngHandle, LJ_ioGET_CONFIG, LJ_chUSER_MEM, 0, &achrUserMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Display the first 4 elements.
 	printf("Read User Mem [0-3] = %d, %d, %d, %d\n",achrUserMem[0],achrUserMem[1],achrUserMem[2],achrUserMem[3]);
@@ -121,7 +110,7 @@ void main()
     //the cal area is an advanced operation.
 	/**
 	//Read the cal constants.
-    lngErrorcode = eGet(lngHandle, LJ_ioGET_CONFIG, LJ_chCAL_CONSTANTS, 0, padblCalMem);
+    lngErrorcode = eGetPtr(lngHandle, LJ_ioGET_CONFIG, LJ_chCAL_CONSTANTS, 0, &adblCalMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Display block 0
 	printf("Read Cal Constants [0-3] = %f, %f, %f, %f\n",adblCalMem[0],adblCalMem[1],adblCalMem[2],adblCalMem[3]);

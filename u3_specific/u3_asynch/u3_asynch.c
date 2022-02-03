@@ -19,7 +19,7 @@
 #include <math.h>
 #include <conio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -73,7 +73,6 @@ void main()
 	//double numI2CBytesToWrite;
 	double numBytes;
 	unsigned char array[256] = {0};
-	long parray = (long)&array[0];
 
 
 	//Open the LabJack.
@@ -112,14 +111,14 @@ void main()
 	numBytes = 2;
 	array[0] = 12;
 	array[1] = 34;
-	lngErrorcode = eGet(lngHandle, LJ_ioASYNCH_COMMUNICATION, LJ_chASYNCH_TX, &numBytes, parray);
+	lngErrorcode = eGetPtr(lngHandle, LJ_ioASYNCH_COMMUNICATION, LJ_chASYNCH_TX, &numBytes, &array[0]);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	// Read 2 bytes.
 	numBytes = 9999;  //Dummy values so we can see them change.
 	array[0] = 222;
 	array[1] = 222;
-	lngErrorcode = eGet(lngHandle, LJ_ioASYNCH_COMMUNICATION, LJ_chASYNCH_RX, &numBytes, parray);
+	lngErrorcode = eGetPtr(lngHandle, LJ_ioASYNCH_COMMUNICATION, LJ_chASYNCH_RX, &numBytes, &array[0]);
 	ErrorHandler(lngErrorcode, __LINE__, 0);
 
 	//Display the read data.

@@ -15,7 +15,7 @@
 #include <stdlib.h>
 #include <conio.h>
 #include <windows.h>
-#include "c:\program files\labjack\drivers\LabJackUD.h"
+#include <LabJackUD.h>
 //The project must also know where to find labjackud.lib.  Here we do
 //that by putting the lib file in the file view to the left.  The relative
 //path stored by Visual Studio might not be the same on your machine, so
@@ -66,17 +66,6 @@ void main()
 	char achrUserMem[1024] = {0};
 	double adblCalMem[128] = {0};
 
-
-	//Make a long parameter which holds the address of the data arrays.  We do this
-	//so the compiler does not generate a warning in the eGet call that passes
-	//the data.  Note that the x1 parameter  in eGet (and AddRequest) is fairly
-	//generic, in that sometimes it could just be a write parameter, and sometimes
-	//it has the address of an array.  Since x1 is not declared as a pointer, the
-	//compiler will complain if you just pass the array pointer without casting
-	//it to a long as follows.
-	long pachrUserMem = (long)&achrUserMem[0];
-	long padblCalMem = (long)&adblCalMem[0];
-
 	//Seed the random number function.
 	srand(GetTickCount());
 
@@ -93,7 +82,7 @@ void main()
 	//put in there such as integers, doubles, or strings.
 
 	//Read the user memory.
-    lngErrorcode = eGet(lngHandle, LJ_ioGET_CONFIG, LJ_chUSER_MEM, 0, pachrUserMem);
+    lngErrorcode = eGetPtr(lngHandle, LJ_ioGET_CONFIG, LJ_chUSER_MEM, 0, &achrUserMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Display the first 4 elements.
 	printf("Read User Mem [0-3] = %d, %d, %d, %d\n",achrUserMem[0],achrUserMem[1],achrUserMem[2],achrUserMem[3]);
@@ -104,16 +93,16 @@ void main()
 		achrUserMem[i] = (char)(255*((float)rand()/RAND_MAX));
 	}
 	printf("Write User Mem [0-3] = %d, %d, %d, %d\n",achrUserMem[0],achrUserMem[1],achrUserMem[2],achrUserMem[3]);
-	lngErrorcode = ePut(lngHandle, LJ_ioPUT_CONFIG, LJ_chUSER_MEM, 0, pachrUserMem);
+	lngErrorcode = eGetPtr(lngHandle, LJ_ioPUT_CONFIG, LJ_chUSER_MEM, 0, &achrUserMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Re-read the user memory.
-    lngErrorcode = eGet(lngHandle, LJ_ioGET_CONFIG, LJ_chUSER_MEM, 0, pachrUserMem);
+    lngErrorcode = eGetPtr(lngHandle, LJ_ioGET_CONFIG, LJ_chUSER_MEM, 0, &achrUserMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Display the first 4 elements.
 	printf("Read User Mem [0-3] = %d, %d, %d, %d\n",achrUserMem[0],achrUserMem[1],achrUserMem[2],achrUserMem[3]);
 
 	
-
+/**
 	//Now a cal constants example.  The calibration memory is passed as doubles.
 	//The memory area consists of 8 blocks (0-7) of 16 doubles each, for a total
 	//of 128 elements.  As of this writing, block 7 is not used, so we will
@@ -123,9 +112,9 @@ void main()
 
 	//This cal example is commented out by default, as writing and reading
     //the cal area is an advanced operation.
-	
+
 	//Read the cal constants.
-    lngErrorcode = eGet(lngHandle, LJ_ioGET_CONFIG, LJ_chCAL_CONSTANTS, 0, padblCalMem);
+    lngErrorcode = eGetPtr(lngHandle, LJ_ioGET_CONFIG, LJ_chCAL_CONSTANTS, 0, &adblCalMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Display the last 4 elements.
 	printf("Read Cal Constants [124-127] = %f, %f, %f, %f\n",adblCalMem[124],adblCalMem[125],adblCalMem[126],adblCalMem[127]);
@@ -137,14 +126,15 @@ void main()
 	}
 	printf("Write  Cal Constants [124-127] = %f, %f, %f, %f\n",adblCalMem[124],adblCalMem[125],adblCalMem[126],adblCalMem[127]);
 	//The special value (0x4C6C) must be put in to write the cal constants.
-	lngErrorcode = ePut(lngHandle, LJ_ioPUT_CONFIG, LJ_chCAL_CONSTANTS, 19564, padblCalMem);
+	double calSpecialVal = 0x4C6C;
+	lngErrorcode = eGetPtr(lngHandle, LJ_ioPUT_CONFIG, LJ_chCAL_CONSTANTS, &calSpecialVal, &adblCalMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Re-read the cal constants.
-    lngErrorcode = eGet(lngHandle, LJ_ioGET_CONFIG, LJ_chCAL_CONSTANTS, 0, padblCalMem);
+    lngErrorcode = eGetPtr(lngHandle, LJ_ioGET_CONFIG, LJ_chCAL_CONSTANTS, 0, &adblCalMem[0]);
     ErrorHandler(lngErrorcode, __LINE__, 0);
 	//Display the first 4 elements.
 	printf("Read  Cal Constants [124-127] = %f, %f, %f, %f\n",adblCalMem[124],adblCalMem[125],adblCalMem[126],adblCalMem[127]);
-	
+**/
 
 
 	getchar();
